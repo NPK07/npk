@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { EventRepository } from 'src/mongodb/event/event.repository';
 
 import { Event } from './event.model';
 
 @Injectable()
 export class EventService {
+  constructor(private readonly eventRepository: EventRepository) {}
+
   findAll(size?: number, page?: number) {
-    return {
-      size,
-      page,
-    };
+    return this.eventRepository.findAll();
   }
   findOne(id: string) {
     return {
